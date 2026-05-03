@@ -12,8 +12,30 @@ function updateStatus(urls) {
   status.textContent = `${urls.length} URL${urls.length !== 1 ? 's' : ''} loaded`;
 }
 
+function updateFocusModeGroup(enabled) {
+  const group = document.getElementById('focusModeTypeGroup');
+  group.querySelectorAll('input').forEach(el => { el.disabled = !enabled; });
+  group.style.opacity = enabled ? '1' : '0.45';
+}
+
+document.getElementById('focusModeEnabled').addEventListener('change', e => {
+  updateFocusModeGroup(e.target.checked);
+});
+
+document.getElementById('saveFocusModeBtn').addEventListener('click', async () => {
+  const enabled = document.getElementById('focusModeEnabled').checked;
+  const type = document.querySelector('input[name="focusModeType"]:checked').value;
+  await chrome.storage.local.set({ focusMode: enabled, focusModeType: type });
+  await chrome.runtime.sendMessage({ type: 'setFocusMode', enabled }).catch(() => {});
+  await chrome.runtime.sendMessage({ type: 'setFocusModeType', value: type }).catch(() => {});
+  const st = document.getElementById('focusModeStatus');
+  st.textContent = 'Saved!';
+  st.style.color = '#4fc3f7';
+  setTimeout(() => { st.textContent = ''; }, 1500);
+});
+
 async function load() {
-  const data = await chrome.storage.local.get(['queue', 'zoom', 'windowType']);
+  const data = await chrome.storage.local.get(['queue', 'zoom', 'windowType', 'focusMode', 'focusModeType']);
   const urls = data.queue || [];
   textarea.value = urls.join('\n');
   updateStatus(urls);
@@ -22,6 +44,13 @@ async function load() {
   zoomInput.value = zoomPct;
   const wt = data.windowType || 'normal';
   document.querySelector(`input[name="windowType"][value="${wt}"]`).checked = true;
+
+  const fm = data.focusMode || false;
+  document.getElementById('focusModeEnabled').checked = fm;
+  const fmt = data.focusModeType || 'sbs65';
+  const radio = document.querySelector(`input[name="focusModeType"][value="${fmt}"]`);
+  if (radio) radio.checked = true;
+  updateFocusModeGroup(fm);
 }
 
 document.getElementById('saveSettingsBtn').addEventListener('click', async () => {

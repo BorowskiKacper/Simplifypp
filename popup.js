@@ -8,6 +8,7 @@ async function refresh() {
   running = resp.running;
   document.getElementById('parallelism').textContent = parallelism;
   document.getElementById('queueCount').textContent = resp.queueLength;
+  document.getElementById('focusModeToggle').checked = resp.focusMode || false;
   updateButtons();
 }
 
@@ -16,6 +17,14 @@ function updateButtons() {
   document.getElementById('pauseBtn').disabled = !running;
   document.getElementById('stopBtn').disabled = !running;
 }
+
+document.getElementById('showAllBtn').addEventListener('click', async () => {
+  await chrome.runtime.sendMessage({ type: 'showAllWindows' });
+});
+
+document.getElementById('focusModeToggle').addEventListener('change', async (e) => {
+  await chrome.runtime.sendMessage({ type: 'setFocusMode', enabled: e.target.checked });
+});
 
 document.getElementById('editQueue').addEventListener('click', (e) => {
   e.preventDefault();
@@ -58,6 +67,8 @@ chrome.runtime.onMessage.addListener((msg) => {
   if (msg.type === 'stateUpdate') {
     running = msg.running;
     document.getElementById('queueCount').textContent = msg.queueLength;
+    if (msg.focusMode !== undefined)
+      document.getElementById('focusModeToggle').checked = msg.focusMode;
     updateButtons();
   }
 });

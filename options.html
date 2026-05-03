@@ -43,6 +43,56 @@
       </div>
     </div>
 
+    <div class="settings-section">
+      <h2>Focus Mode</h2>
+      <p class="hint">Automatically resizes windows when you click into one of them.</p>
+      <div class="setting-row">
+        <label class="toggle-label">
+          <input type="checkbox" id="focusModeEnabled">
+          <span>Enable Focus Mode</span>
+        </label>
+      </div>
+      <div class="setting-row" id="focusModeTypeGroup">
+        <label>Layout when a window is focused</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="focusModeType" value="sbs65" checked>
+            <span class="radio-text"><strong>Side by Side 65/35</strong>
+              <span class="hint inline">focused: 65% width left, others share 35% strip right</span></span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="focusModeType" value="sbs80">
+            <span class="radio-text"><strong>Side by Side 80/20</strong>
+              <span class="hint inline">focused: 80% width left, others share 20% strip right</span></span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="focusModeType" value="zen">
+            <span class="radio-text"><strong>Zen</strong>
+              <span class="hint inline">focused: maximized — others: minimized to taskbar</span></span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="focusModeType" value="peek">
+            <span class="radio-text"><strong>Peek</strong>
+              <span class="hint inline">focused: nearly full width — others: 100px strips at right edge</span></span>
+          </label>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="saveFocusModeBtn" class="primary">Save Focus Mode</button>
+        <span class="status" id="focusModeStatus"></span>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h2>Keyboard Shortcuts</h2>
+      <p class="hint">To change these, go to:<br>
+        <span class="shortcut-hint">chrome://extensions/shortcuts</span></p>
+      <ul class="shortcut-list">
+        <li><strong>Ctrl+Shift+H</strong> — Hide / show all job windows</li>
+        <li><strong>Ctrl+Shift+F</strong> — Bring all job windows to front</li>
+      </ul>
+    </div>
+
     <h1>Job Queue</h1>
     <p class="hint">One URL per line. Paste or import a .txt file.</p>
     <textarea id="urls" spellcheck="false"

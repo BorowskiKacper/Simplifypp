@@ -64,3 +64,8 @@ body {
 .actions button:disabled { opacity: 0.4; cursor: default; }
 .actions button.primary { border-color: #4fc3f7; color: #4fc3f7; }
 .actions button.danger { border-color: #ef5350; color: #ef5350; }
+
+.full-width-btn { width: 100%; text-align: center; padding: 6px 0; border: 1px solid #444;
+  background: #2a2a4e; color: #e0e0e0; border-radius: 5px; cursor: pointer; font-size: 12px; }
+.full-width-btn:hover { background: #3a3a6e; }
+.fm-toggle { accent-color: #4fc3f7; width: 15px; height: 15px; cursor: pointer; }
