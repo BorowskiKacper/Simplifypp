@@ -1,0 +1,66 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 240px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  background: #1a1a2e;
+  color: #e0e0e0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: #16213e;
+  border-bottom: 1px solid #0f3460;
+}
+
+.title { font-weight: 700; font-size: 14px; color: #4fc3f7; }
+
+.header a { color: #90caf9; text-decoration: none; font-size: 11px; }
+.header a:hover { text-decoration: underline; }
+
+.section { padding: 10px 14px; border-bottom: 1px solid #0f3460; }
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.row:last-child { margin-bottom: 0; }
+
+.counter { display: flex; align-items: center; gap: 8px; }
+
+.counter button {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #4fc3f7;
+  background: transparent;
+  color: #4fc3f7;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+.counter button:hover { background: #4fc3f7; color: #1a1a2e; }
+.counter span { min-width: 20px; text-align: center; font-weight: 600; }
+
+.actions { display: flex; gap: 6px; padding: 10px 14px; }
+
+.actions button {
+  flex: 1;
+  padding: 6px 0;
+  border: 1px solid #444;
+  background: #2a2a4e;
+  color: #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.actions button:hover:not(:disabled) { background: #3a3a6e; }
+.actions button:disabled { opacity: 0.4; cursor: default; }
+.actions button.primary { border-color: #4fc3f7; color: #4fc3f7; }
+.actions button.danger { border-color: #ef5350; color: #ef5350; }

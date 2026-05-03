@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <span class="title">Simplify++</span>
+    <a href="#" id="editQueue">Edit Queue</a>
+  </div>
+  <div class="section">
+    <div class="row">
+      <span>Windows</span>
+      <div class="counter">
+        <button id="dec">−</button>
+        <span id="parallelism">4</span>
+        <button id="inc">+</button>
+      </div>
+    </div>
+    <div class="row">
+      <span>Queue: <span id="queueCount">0</span> remaining</span>
+    </div>
+  </div>
+  <div class="actions">
+    <button id="startBtn" class="primary">▶ Start</button>
+    <button id="pauseBtn">⏸ Pause</button>
+    <button id="stopBtn" class="danger">■ Stop</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

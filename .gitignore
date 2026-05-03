@@ -1,0 +1,22 @@
+.claude
+
+# Dependencies
+node_modules/
+
+# Jest coverage output
+coverage/
+
+# Puppeteer browser cache
+.cache/
+
+# Extension packaging artifacts
+*.zip
+*.crx
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Editor
+.vscode/
+.idea/

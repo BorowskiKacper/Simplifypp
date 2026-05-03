@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Simplify++ — Job Queue</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Job Queue</h1>
+    <p class="hint">One URL per line. Paste or import a .txt file.</p>
+    <textarea id="urls" spellcheck="false"
+      placeholder="https://jobs.example.com/1&#10;https://jobs.example.com/2"></textarea>
+    <div class="status" id="status">0 URLs loaded</div>
+    <div class="actions">
+      <label class="btn" for="fileInput">Import .txt</label>
+      <input type="file" id="fileInput" accept=".txt" style="display:none">
+      <button id="clearBtn">Clear</button>
+      <button id="saveBtn" class="primary">Save</button>
+    </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
