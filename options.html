@@ -7,6 +7,42 @@
 </head>
 <body>
   <div class="container">
+    <div class="settings-section">
+      <h2>Display Settings</h2>
+      <div class="setting-row">
+        <label for="zoomInput">Zoom</label>
+        <div class="zoom-control">
+          <input type="number" id="zoomInput" min="10" max="100" value="67" step="1">
+          <span class="unit">%</span>
+          <span class="hint inline">applied when each window opens</span>
+        </div>
+        <div class="field-error" id="zoomError"></div>
+      </div>
+      <div class="setting-row">
+        <label>Window type</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="windowType" value="normal" id="typeNormal" checked>
+            <span class="radio-text">
+              <strong>Normal</strong>
+              <span class="hint inline">full browser — tab strip and extensions bar visible</span>
+            </span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="windowType" value="popup" id="typePopup">
+            <span class="radio-text">
+              <strong>Minimal</strong>
+              <span class="hint inline">hides tab strip and extensions bar</span>
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="saveSettingsBtn" class="primary">Save Settings</button>
+        <span class="status" id="settingsStatus"></span>
+      </div>
+    </div>
+
     <h1>Job Queue</h1>
     <p class="hint">One URL per line. Paste or import a .txt file.</p>
     <textarea id="urls" spellcheck="false"

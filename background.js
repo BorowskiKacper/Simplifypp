@@ -2,17 +2,21 @@ importScripts('lib/queue.js', 'lib/grid.js');
 
 let queue = [];
 let parallelism = 4;
+let zoom = 0.67;
+let windowType = 'normal';
 let running = false;
 const slots = {}; // slotIndex (0..N-1) -> { windowId, url }
 
 async function loadState() {
-  const data = await chrome.storage.local.get(['queue', 'parallelism']);
+  const data = await chrome.storage.local.get(['queue', 'parallelism', 'zoom', 'windowType']);
   queue = data.queue || [];
   parallelism = data.parallelism || 4;
+  zoom = data.zoom !== undefined ? data.zoom : 0.67;
+  windowType = data.windowType || 'normal';
 }
 
 async function persistState() {
-  await chrome.storage.local.set({ queue, parallelism });
+  await chrome.storage.local.set({ queue, parallelism, zoom, windowType });
 }
 
 async function openSlot(slotIndex, url) {
@@ -25,9 +29,13 @@ async function openSlot(slotIndex, url) {
     top: pos.top,
     width: pos.width,
     height: pos.height,
-    type: 'normal',
+    type: windowType,
   });
   slots[slotIndex] = { windowId: win.id, url };
+  if (zoom !== 1) {
+    const tabId = win.tabs && win.tabs[0] && win.tabs[0].id;
+    if (tabId) chrome.tabs.setZoom(tabId, zoom).catch(() => {});
+  }
 }
 
 async function start() {
@@ -104,7 +112,7 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         break;
       case 'getState':
         await loadState();
-        sendResponse({ running, queueLength: queue.length, parallelism });
+        sendResponse({ running, queueLength: queue.length, parallelism, zoom, windowType });
         return;
     }
     sendResponse({ ok: true });
